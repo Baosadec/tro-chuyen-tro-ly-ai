@@ -1,0 +1,5 @@
+{
+  "name": "Gemini AI Playground VN",
+  "description": "Ứng dụng React để kiểm thử khả năng của Gemini API (Text & Vision), hỗ trợ tiếng Việt.",
+  "requestFramePermissions": []
+}
