@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gemini AI Playground VN</title>
+    
+    <!-- 1. CẤU HÌNH API KEY -->
+    <script>
+      // Thiết lập biến môi trường giả lập cho browser
+      window.process = { 
+        env: { 
+          // HÃY DÁN API KEY CỦA BẠN VÀO ĐÂY
+          API_KEY: '' 
+        } 
+      };
+    </script>
+
+    <!-- 2. TRÌNH BẮT LỖI (Error Trap) -->
+    <script>
+      window.onerror = function(message, source, lineno, colno, error) {
+        const errorDiv = document.getElementById('error-display') || document.createElement('div');
+        errorDiv.id = 'error-display';
+        Object.assign(errorDiv.style, {
+          position: 'fixed', top: '0', left: '0', width: '100%', padding: '20px',
+          background: '#ef4444', color: '#fff', zIndex: '9999', fontFamily: 'monospace',
+          whiteSpace: 'pre-wrap', borderBottom: '2px solid #b91c1c'
+        });
+        errorDiv.innerHTML = `<h3>⚠️ Lỗi Ứng Dụng:</h3><div>${message}</div><small>${source}:${lineno}</small>`;
+        document.body.prepend(errorDiv);
+        console.error("APP ERROR:", error);
+      };
+    </script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9',
+                600: '#0284c7', 700: '#0369a1', 900: '#0c4a6e',
+              }
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- 3. IMPORT MAP -->
+    <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0?dev",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client?dev",
+    "@google/genai": "https://esm.sh/@google/genai@0.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/"
+  }
+}
+</script>
+
+    <!-- 4. BABEL STANDALONE -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-slate-900 text-slate-100 antialiased h-screen overflow-hidden">
+    <div id="root" class="h-full flex items-center justify-center">
+      <!-- Loading state mặc định trước khi React load -->
+      <div class="animate-pulse flex flex-col items-center">
+        <div class="h-8 w-8 bg-brand-500 rounded-full mb-4"></div>
+        <div class="text-brand-100">Đang tải ứng dụng...</div>
+      </div>
+    </div>
+    
+    <!-- 5. LOAD APP -->
+    <script type="text/babel" data-type="module" data-presets="react,typescript" src="./index.tsx"></script>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
